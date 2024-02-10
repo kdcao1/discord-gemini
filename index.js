@@ -50,10 +50,8 @@ client.on('messageCreate', message => {
                 }
             })
         }
-      }
     }
 })
-
 //sets initial history
 let historyLog = [
   {
