@@ -1,6 +1,6 @@
 const { Client, Events, GatewayIntentBits } = require('discord.js');
 const { GoogleGenerativeAI } = require("@google/generative-ai");
-const { dotenv } = require("dotenv");
+const dotenv = require("dotenv");
 
 // Grab Keys
 dotenv.config();
