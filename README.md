@@ -1,7 +1,11 @@
 # discord-gemini_pro-chatbot
 Discord Bot Integration with Google Gemini Pro
+
 Written in JS
+
 ChatBot for Dedicated Discord Channel
+
+Requires Node.js and npm
 
 # Dependencies:
 
