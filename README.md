@@ -9,7 +9,7 @@ Requires Node.js and npm
 
 # Dependencies:
 
- - node.js
+ - node.js - https://nodejs.org/en
  - npm
  - Discord Bot token
  - Google Cloud Gemini API key
