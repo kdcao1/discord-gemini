@@ -37,7 +37,7 @@ client.on('messageCreate', message => {
                 //Checks for empty message
                 if (text !== ""){
                     //Checks Discord Message Limit
-                    if (text.length > 1999){
+                    if (text.length > 1800){
                         let size = Math.ceil(text.length/2000);
                         let half = Math.ceil(text.length/size);
                         for(i = 0; i < size; i++){
@@ -56,11 +56,11 @@ client.on('messageCreate', message => {
 let historyLog = [
   {
     role: "user",
-    parts: "Hello!",
+    parts: [{ text: "Hello!"}],
   },
   {
     role: "model",
-    parts: "How can I help you today?",
+    parts: [{ text:"How can I help you today?"}],
   },
 ];
 
@@ -69,13 +69,13 @@ async function geminiAI(userInput) {
 try{
     //Sets Ai saftey filters, can be (BLOCK_NONE, BLOCK_ONLY_HIGH, BLOCK_MEDIUM_AND_ABOVE, BLOCK_LOW_AND_ABOVE)
     const safetySettings = [
-        { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_NONE" },
-        { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_NONE" },
-        { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "BLOCK_NONE" },
-        { category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "BLOCK_NONE" },
+        { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_MEDIUM_AND_ABOVE" },
+        { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_MEDIUM_AND_ABOVE" },
+        { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "BLOCK_MEDIUM_AND_ABOVE" },
+        { category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "BLOCK_MEDIUM_AND_ABOVE" },
     ];
     const model = genAI.getGenerativeModel({ 
-        model: "gemini-pro",
+        model: "gemini-1.5-flash",
         safetySettings,
     });
     //Sets how Ai responds
@@ -92,7 +92,7 @@ try{
     //Saves User input into history
     historyLog.push({
         role: "user",
-        parts: userInput,
+        parts: [{text: userInput}],
     });
     const msg = userInput;
     const result = await chat.sendMessage(msg);
@@ -101,26 +101,23 @@ try{
     //Saves Ai output into history
     historyLog.push({
         role: "model",
-        parts: text,
+        parts: [{ text: text}],
     });
-    // Limits history, Change limit to keep more history
-    let limit = 30;
-    if (historyLog.length >  limit) {
-        historyLog.shift();
-        historyLog.shift();
-    }
     return text;
     } catch (error){
+        //Shows error and resets history log
         console.log(error)
         const text = "Could Not Prompt AI, I have been reset.";
-        historyLog = [{
-            role: "user",
-            parts: "Hello!",
-        },
-        {
-            role: "model",
-            parts: "How can I help you today?",
-        },]
+        historyLog = [
+            {
+                role: "user",
+                parts: [{ text: "Hello!"}],
+            },
+            {
+                role: "model",
+                parts: [{ text:"How can I help you today?"}],
+            },
+        ]
     return text
     } 
 }
