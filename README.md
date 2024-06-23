@@ -1,4 +1,4 @@
-# discord-gemini_pro-chatbot
+# discord-gemini
 Discord Bot Integration with Google Gemini Pro
 
 Written in JS
