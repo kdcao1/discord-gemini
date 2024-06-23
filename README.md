@@ -27,14 +27,14 @@ Requires Node.js and npm
  7. Give read message and send message permissions.
  8. Use generated URL at bottom to add to server
 
-## Google Gemini Pro API Key
+## Google Gemini API Key
 
  1. Go to Google AI Studio to get key - https://makersuite.google.com/app/apikey
  2. Create new API key, save this somewhere
 
 ## Set up .env file
 
- 1. Set GEMINI_API_KEY = Google Gemini Pro API Key
+ 1. Set GEMINI_API_KEY = Google Gemini API Key
  2. Set DISCORD_API_KEY = Discord Bot Token
  3. Set CHANNEL_ID = dedicated channel id for bot
 
